@@ -1,6 +1,7 @@
 const Router = require('express').Router();
 const User = require('../Model/Admin');
 const config = require('../config.json');
+const mids = require('../Middlewares/index');
 
 function getC(req, res) {
     let cookie = req.cookies.errors;
@@ -11,6 +12,10 @@ function getC(req, res) {
     return cookie;
 
 }
+
+Router.get('/', mids.IsLogin,(req,res)=>{
+    res.send("ok");
+});
 
 Router.get('/login', (req, res) => {
     res.render('login', {
@@ -25,7 +30,6 @@ Router.post('/login', async (req, res) => {
         email,
         password
     });
-    console.log(user)
     if (!user) {
         return res.cookie('errors', [
             "نام کاربری یا رمز عبور اشتباه است."
