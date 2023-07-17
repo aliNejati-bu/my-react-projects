@@ -11,7 +11,7 @@ function App() {
                 setData('')
             }
         },1000);
-
+ 
 
         return () => {
             clearTimeout(timeOut);
